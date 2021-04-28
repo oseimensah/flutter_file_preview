@@ -60,9 +60,9 @@ public class FileDisplayActivity extends AppCompatActivity {
         titleBar.getCenterTextView().setText(title);
 //        leftBackLtl.setTitle(title).leftFinish(true);
         x5WebView.addJavascriptInterface(new JsObject(), "android");
-        //是否打开文件
+        //Whether to open the file
         handler.sendEmptyMessageDelayed(1001, 500);
-        //打开文件
+        //open a file
         if (!TextUtils.isEmpty(url) && isOpenFile) {
             tbsReaderView = new TbsReaderView(this, readerCallback);
             handler.removeMessages(1001);
@@ -159,17 +159,17 @@ public class FileDisplayActivity extends AppCompatActivity {
 
     private void openFile(File file) {
         if (file != null && !TextUtils.isEmpty(file.toString())) {
-            //增加下面一句解决没有TbsReaderTemp文件夹存在导致加载文件失败
+            //Add the following sentence to solve it TbsReaderTemp File loading failed due to the existence of the folder
             String bsReaderTemp = "/storage/emulated/0/TbsReaderTemp";
             File bsReaderTempFile = new File(bsReaderTemp);
             if (!bsReaderTempFile.exists()) {
-                Log.d(TAG, "准备创建/storage/emulated/0/TbsReaderTemp！！");
+                Log.d(TAG, "Ready to create /storage/emulated/0/TbsReaderTemp！！");
                 boolean mkdir = bsReaderTempFile.mkdir();
                 if (!mkdir) {
-                    Log.e(TAG, "创建/storage/emulated/0/TbsReaderTemp失败！！！！！");
+                    Log.e(TAG, "create/storage/emulated/0/TbsReaderTempfailure！！！！！");
                 }
             }
-            //加载文件
+            //Load File
             Bundle localBundle = new Bundle();
             Log.d(TAG, file.toString());
             localBundle.putString("filePath", file.toString());
@@ -179,7 +179,7 @@ public class FileDisplayActivity extends AppCompatActivity {
                 this.tbsReaderView.openFile(localBundle);
             }
         } else {
-            Log.e(TAG, "文件路径无效！");
+            Log.e(TAG, "Invalid file path！");
         }
     }
 
@@ -190,7 +190,7 @@ public class FileDisplayActivity extends AppCompatActivity {
     private File getCacheFile(String url) {
         File cacheFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/007/"
             + getFileName(url));
-        Log.d(TAG, "缓存文件 = " + cacheFile.toString());
+        Log.d(TAG, "Cache file = " + cacheFile.toString());
         return cacheFile;
     }
 
@@ -278,7 +278,7 @@ public class FileDisplayActivity extends AppCompatActivity {
         handler.removeMessages(1001);
         handler = null;
         x5WebView.reload();
-        //销毁
+        //destroy
         x5WebView.clearCache(true);
         x5WebView.clearFormData();
         x5WebView.destroy();
@@ -289,12 +289,12 @@ public class FileDisplayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置状态栏透明度
+        //Set the transparency of the status bar
         if (isStatusBar) {
             StatusNavBar.with(this).statusBarColor(R.color.transparent).statusBarDarkFont(true).navigationBarColor(R.color.black_degree_50).init();
         }
         setContentView(getContentViewId());
-        // 隐藏action bar
+        // hide action bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -315,7 +315,7 @@ public class FileDisplayActivity extends AppCompatActivity {
 
     static class JsObject {
         @JavascriptInterface
-        public void navigateTo(String jsonData) {//活动专题可能和移动端的交互
+        public void navigateTo(String jsonData) {//Activity topic may interact with mobile terminal
         }
     }
 }

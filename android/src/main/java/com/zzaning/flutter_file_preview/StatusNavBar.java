@@ -152,10 +152,10 @@ public class StatusNavBar {
 
         mActivity = activity;
         if (mActivity == null) {
-            throw new IllegalArgumentException("Activity不能为空!!!");
+            throw new IllegalArgumentException("Activity Can not be empty!!!");
         }
         if (mImmersionBarMap.get(mActivity.toString()) == null) {
-            throw new IllegalArgumentException("必须先在宿主Activity初始化");
+            throw new IllegalArgumentException("Must be in host first Activity initialization");
         }
 
         mIsActivity = false;
@@ -184,13 +184,13 @@ public class StatusNavBar {
         mActivity = dialogFragment.getActivity();
         mDialog = dialog;
         if (mActivity == null) {
-            throw new IllegalArgumentException("Activity不能为空!!!");
+            throw new IllegalArgumentException("Activity Can not be empty!!!");
         }
         if (mDialog == null) {
-            throw new IllegalArgumentException("DialogFragment中的dialog不能为空");
+            throw new IllegalArgumentException("DialogFragment neutral dialog Can not be empty");
         }
         if (mImmersionBarMap.get(mActivity.toString()) == null) {
-            throw new IllegalArgumentException("必须先在宿主Activity初始化");
+            throw new IllegalArgumentException("Must be in host first Activity initialization");
         }
 
         mWindow = mDialog.getWindow();
@@ -226,13 +226,13 @@ public class StatusNavBar {
         mActivity = activity;
         mDialog = dialog;
         if (mActivity == null) {
-            throw new IllegalArgumentException("Activity不能为空!!!");
+            throw new IllegalArgumentException("Activity Can not be empty!!!");
         }
         if (mDialog == null) {
-            throw new IllegalArgumentException("dialog不能为空");
+            throw new IllegalArgumentException("dialog Can not be empty");
         }
         if (mImmersionBarMap.get(mActivity.toString()) == null) {
-            throw new IllegalArgumentException("必须先在宿主Activity初始化");
+            throw new IllegalArgumentException("Must be in host first Activity initialization");
         }
 
         mWindow = mDialog.getWindow();
@@ -269,7 +269,7 @@ public class StatusNavBar {
      */
     public static StatusNavBar with(@NonNull Fragment fragment) {
         if (fragment.getActivity() == null) {
-            throw new IllegalArgumentException("Activity不能为空!!!");
+            throw new IllegalArgumentException("Activity cannot be empty!!!");
         }
         StatusNavBar statusNavBar = mImmersionBarMap.get(fragment.getActivity().toString() + fragment.toString());
         if (statusNavBar == null) {
@@ -306,7 +306,7 @@ public class StatusNavBar {
      */
     public static StatusNavBar with(@NonNull DialogFragment dialogFragment) {
         if (dialogFragment.getActivity() == null) {
-            throw new IllegalArgumentException("Activity不能为空!!!");
+            throw new IllegalArgumentException("Activity cannot be empty!!!");
         }
         StatusNavBar statusNavBar = mImmersionBarMap.get(dialogFragment.getActivity().toString() + dialogFragment.toString());
         if (statusNavBar == null) {
@@ -327,7 +327,8 @@ public class StatusNavBar {
     @Deprecated
     public static StatusNavBar with(@NonNull DialogFragment dialogFragment, @NonNull Dialog dialog) {
         if (dialogFragment.getActivity() == null) {
-            throw new IllegalArgumentException("Activity不能为空!!!");
+            // throw new IllegalArgumentException("Activity不能为空!!!");
+            throw new IllegalArgumentException("Activity cannot be empty!!!");
         }
         StatusNavBar statusNavBar = mImmersionBarMap.get(dialogFragment.getActivity().toString() + dialogFragment.toString());
         if (statusNavBar == null) {
@@ -936,7 +937,7 @@ public class StatusNavBar {
      */
     public StatusNavBar addViewSupportTransformColorInt(View view, @ColorInt int viewColorAfterTransform) {
         if (view == null) {
-            throw new IllegalArgumentException("View参数不能为空");
+            throw new IllegalArgumentException("View Parameter cannot be empty");
         }
         Map<Integer, Integer> map = new HashMap<>();
         map.put(mBarParams.statusBarColor, viewColorAfterTransform);
@@ -955,7 +956,7 @@ public class StatusNavBar {
     public StatusNavBar addViewSupportTransformColorInt(View view, @ColorInt int viewColorBeforeTransform,
                                                         @ColorInt int viewColorAfterTransform) {
         if (view == null) {
-            throw new IllegalArgumentException("View参数不能为空");
+            throw new IllegalArgumentException("View Parameter cannot be empty");
         }
         Map<Integer, Integer> map = new HashMap<>();
         map.put(viewColorBeforeTransform, viewColorAfterTransform);
@@ -983,7 +984,7 @@ public class StatusNavBar {
      */
     public StatusNavBar removeSupportView(View view) {
         if (view == null) {
-            throw new IllegalArgumentException("View参数不能为空");
+            throw new IllegalArgumentException("View Parameter cannot be empty");
         }
         Map<Integer, Integer> map = mBarParams.viewMap.get(view);
         if (map.size() != 0) {
@@ -1424,7 +1425,7 @@ public class StatusNavBar {
      */
     public StatusNavBar addTag(String tag) {
         if (isEmpty(tag)) {
-            throw new IllegalArgumentException("tag不能为空");
+            throw new IllegalArgumentException("tag cannot be empty");
         }
         BarParams barParams = mBarParams.clone();
         mTagMap.put(tag, barParams);
@@ -1440,7 +1441,7 @@ public class StatusNavBar {
      */
     public StatusNavBar getTag(String tag) {
         if (isEmpty(tag)) {
-            throw new IllegalArgumentException("tag不能为空");
+            throw new IllegalArgumentException("tag cannot be empty");
         }
         BarParams barParams = mTagMap.get(tag);
         if (barParams != null) {
@@ -2521,7 +2522,7 @@ class KeyboardPatch {
         this.mBarParams = dialog != null ? StatusNavBar.with(activity, dialog, tag).getBarParams()
             : StatusNavBar.with(activity).getBarParams();
         if (mBarParams == null)
-            throw new IllegalArgumentException("先使用ImmersionBar初始化");
+            throw new IllegalArgumentException("Use first ImmersionBar initialization");
     }
 
     private KeyboardPatch(Activity activity, Window window) {
